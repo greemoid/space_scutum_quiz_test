@@ -4,8 +4,8 @@ import 'package:space_scutum_quiz_test/core/router/router.dart';
 import 'package:space_scutum_quiz_test/injection_container.dart';
 import 'package:space_scutum_quiz_test/presentation/blocs/quiz/quiz_bloc.dart';
 
-void main() {
-  initDependencies();
+Future<void> main() async {
+  await initDependencies();
   runApp(const MyApp());
 }
 
