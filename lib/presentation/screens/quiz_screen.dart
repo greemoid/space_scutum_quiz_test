@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:space_scutum_quiz_test/core/router/routes.dart';
 import 'package:space_scutum_quiz_test/presentation/blocs/quiz/quiz_bloc.dart';
 import 'package:space_scutum_quiz_test/presentation/widgets/main_button.dart';
 import 'package:space_scutum_quiz_test/presentation/widgets/quiz_answer_button.dart';
@@ -148,7 +149,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 child: MainButton(
                                   onTap: () {
                                     context.push(
-                                        '/results/${questions.length}/$_correctAnswersCount');
+                                        '${Routes.results.path}/${questions.length}/$_correctAnswersCount');
                                   },
                                   text: 'Finish quiz',
                                 ).animate().slideY(

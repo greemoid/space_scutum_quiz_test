@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:space_scutum_quiz_test/core/router/routes.dart';
 import 'package:space_scutum_quiz_test/presentation/widgets/main_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             MainButton(
-              onTap: () => context.push('/quiz'),
+              onTap: () => context.push(Routes.quiz.path),
               text: 'Start quiz',
             ),
             SizedBox(),

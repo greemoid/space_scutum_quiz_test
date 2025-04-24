@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:space_scutum_quiz_test/core/router/routes.dart';
 import 'package:space_scutum_quiz_test/presentation/widgets/main_button.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -48,7 +49,9 @@ class ResultScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              MainButton(onTap: () => context.push('/'), text: 'Return to Home')
+              MainButton(
+                  onTap: () => context.push(Routes.home.path),
+                  text: 'Return to Home')
             ],
           ),
         ),
