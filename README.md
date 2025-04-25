@@ -1,16 +1,44 @@
-# space_scutum_quiz_test
+# 📱 Quiz App
 
-A new Flutter project.
+**⬇️ Demo Video**  
+https://github.com/user-attachments/assets/a7692ce1-86a5-4f61-9898-5668a7dfd5c3
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## 🧠 About
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+This is a simple quiz app made for a Flutter test task.  
+It asks users a few questions and shows the result at the end.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✅ Features
+
+- A screen with questions and answer choices  
+- Tap an answer to go to the next question  
+- Final screen shows how many answers were correct  
+- Smooth animations between questions  
+- A screen to see results from old quizzes  
+- Data is saved using objectbox
+
+## 🧪 Tests
+
+- Unit tests  
+- BLoC tests for logic
+- Important parts of the app is covered
+
+## 🧰 Tech Used
+
+- **Flutter**  
+- **flutter_bloc** for state management  
+- **objectbox** for database  
+  (I chose objectbox because I’ve already worked with hive, drift, isar, and sqflite before)
+- **freezed** for DAOs
+- **flutter_animate** for animations (built in animations in some cases)
+- Quiz is loaded from JSON file in the assets
+
+
+## 📂 How to Run
+
+1. Clone the repo `https://github.com/greemoid/space_scutum_quiz_test.git`
+2. Run `flutter pub get`
+3. Run `dart run build_runner build`
+4. Run the app using `flutter run` (linux and android tested ✅)
