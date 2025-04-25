@@ -8,6 +8,11 @@ import 'package:space_scutum_quiz_test/presentation/blocs/quiz/quiz_bloc.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
+  
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+  };
+
   runApp(const MyApp());
 }
 
