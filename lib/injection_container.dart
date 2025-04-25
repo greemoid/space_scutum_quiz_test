@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:space_scutum_quiz_test/data/datasources/quiz_local_data_source.dart';
 import 'package:space_scutum_quiz_test/data/datasources/quiz_network_data_source.dart';
 import 'package:space_scutum_quiz_test/data/models/result_model.dart';
@@ -15,7 +16,9 @@ import 'package:space_scutum_quiz_test/presentation/blocs/quiz/quiz_bloc.dart';
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
-  final Store store = await openStore(directory: 'results');
+  final directory =
+      await getApplicationDocumentsDirectory(); 
+  final store = await openStore(directory: directory.path);
   final box = store.box<ResultModel>();
 
   serviceLocator
