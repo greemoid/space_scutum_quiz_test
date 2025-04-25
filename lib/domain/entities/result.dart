@@ -1,10 +1,12 @@
 class Result {
-  final int id;
+  final int? id;
   final int totalQuestions;
   final int correctAnswers;
+  final DateTime createdAtUtc;
 
   Result(
-      {required this.id,
+      {this.id,
       required this.totalQuestions,
-      required this.correctAnswers});
+      required this.correctAnswers,
+      required this.createdAtUtc});
 }

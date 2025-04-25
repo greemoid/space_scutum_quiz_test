@@ -3,6 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:space_scutum_quiz_test/core/router/routes.dart';
+import 'package:space_scutum_quiz_test/domain/entities/result.dart';
+import 'package:space_scutum_quiz_test/presentation/blocs/history/result_bloc.dart';
 import 'package:space_scutum_quiz_test/presentation/blocs/quiz/quiz_bloc.dart';
 import 'package:space_scutum_quiz_test/presentation/widgets/main_button.dart';
 import 'package:space_scutum_quiz_test/presentation/widgets/quiz_answer_button.dart';
@@ -24,6 +26,14 @@ class _QuizScreenState extends State<QuizScreen> {
   void initState() {
     super.initState();
     context.read<QuizBloc>().add(GetQuizEvent());
+  }
+
+  void _addResult(int totalQuestions, int correctAnswers) {
+    final result = Result(
+        totalQuestions: totalQuestions,
+        correctAnswers: correctAnswers,
+        createdAtUtc: DateTime.now().toUtc());
+    context.read<ResultBloc>().add(AddResultEvent(result: result));
   }
 
   void _nextQuestion() {
@@ -148,6 +158,9 @@ class _QuizScreenState extends State<QuizScreen> {
                                 padding: const EdgeInsets.only(top: 16),
                                 child: MainButton(
                                   onTap: () {
+                                    _addResult(
+                                        questions.length, _correctAnswersCount);
+
                                     context.push(
                                         '${Routes.results.path}/${questions.length}/$_correctAnswersCount');
                                   },

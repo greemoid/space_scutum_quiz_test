@@ -3,15 +3,26 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:space_scutum_quiz_test/presentation/blocs/history/result_bloc.dart';
 
-class HistoryScreen extends StatelessWidget {
+class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
+
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ResultBloc>().add(GetResultEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Історія результатів',
+          'Results',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w700,
@@ -35,7 +46,7 @@ class HistoryScreen extends StatelessWidget {
               if (results.isEmpty) {
                 return Center(
                   child: Text(
-                    'Немає результатів',
+                    'No results',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey.shade600,
@@ -52,19 +63,19 @@ class HistoryScreen extends StatelessWidget {
                     index: index,
                     correctAnswers: result.correctAnswers,
                     totalQuestions: result.totalQuestions,
-                    date: DateTime.now().toUtc(),
+                    date: result.createdAtUtc.toLocal(),
                   ).animate(delay: (100 * index).ms).fadeIn().slideX(
                         begin: 0.5,
                         end: 0,
                         duration: 300.ms,
-                        curve: Curves.easeOutCubic,
+                        curve: Curves.easeOut,
                       );
                 },
               );
             } else if (state is ResultError) {
               return Center(
                 child: Text(
-                  'Помилка: ${state.message}',
+                  'Error: ${state.message}',
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.red.shade400,
@@ -95,60 +106,33 @@ class _ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final percentage = (correctAnswers / totalQuestions * 100).round();
-    Color cardColor;
-    IconData icon;
-
-    if (percentage >= 80) {
-      cardColor = Colors.green.shade400;
-      icon = Icons.check_circle_outline;
-    } else if (percentage >= 50) {
-      cardColor = Colors.orange.shade400;
-      icon = Icons.help_outline;
-    } else {
-      cardColor = Colors.red.shade400;
-      icon = Icons.cancel_outlined;
-    }
-
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: cardColor,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Colors.grey, width: 2)),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 32,
-          ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Спроба #${index + 1}',
+                  'Attempt #${index + 1}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${date.day}.${date.month}.${date.year}',
+                  '${date.day}.${date.month}.${date.year} - ${date.hour}:${date.minute}',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Colors.white.withValues(alpha: 0.8),
+                    color: Colors.black.withValues(alpha: 0.8),
                   ),
                 ),
               ],
@@ -159,7 +143,7 @@ class _ResultCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ],

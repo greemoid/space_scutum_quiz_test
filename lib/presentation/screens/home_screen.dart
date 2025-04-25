@@ -18,7 +18,9 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(),
-                IconButton(onPressed: () {}, icon: Icon(Icons.access_time))
+                IconButton(onPressed: () {
+                  context.push(Routes.history.path);
+                }, icon: Icon(Icons.access_time))
               ],
             ),
             MainButton(
